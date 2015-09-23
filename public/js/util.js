@@ -6,9 +6,9 @@
         x = x * 1;
         return x * x;
     }
-    function die() {
+    function die(x) {
         var arr = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < x; i++) {
             arr.push(Math.floor(Math.random() * 6) + 1);
         }
         return arr;

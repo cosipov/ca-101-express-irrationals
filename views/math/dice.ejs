@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Home page</h1>
+<h3>Nav bar</h3>
+<ul>
+    <li><a href="/">Home</a></li>
+</ul>
+
+<form method="post" action="/dice">
+    <input type="text" name="rolls" value="<%= rolls %>"/>
+    <h3>List</h3>
+    <%
+        for (var i = 0; i < list.length; i++) {
+    %>
+        <li><%= list[i] %></li>
+    <%
+        }
+     %>
+    </ul>
+    <h3>Sum</h3>
+    <%= sum %>
+
+    <h3>Average</h3>
+    <%= avg %>
+    <br/>
+    <button>Roll</button>
+</form>
+</body>
+</html>

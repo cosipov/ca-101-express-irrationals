@@ -62,6 +62,18 @@ app.post('/distance', function(req, res) {
     'y1': req.body.y1, 'x2': req.body.x2, 'y2': req.body.y2});
 })
 
+app.get('/dice', function(req, res) {
+  res.render('math/dice', {rolls: '', list: [], sum: '', avg: ''});
+})
+
+app.post('/dice', function(req, res) {
+  var list = utils.die(req.body.rolls);
+  var sum = list.reduce(function(curr, prev){return curr+prev}, 0);
+  var avg = sum / list.length;
+  list.reduce(function(curr, prev, i) {return prev + ((curr - prev) / i + 1)}, 0);
+  res.render('math/dice', {rolls: req.body.rolls, 'list': list, 'sum': sum, 'avg': avg});
+})
+
 
 
 
