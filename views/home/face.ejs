@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Home page</h1>
+<h3>Nav bar</h3>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/face">face</a></li>
+
+</ul>
+
+<form method="post" action="/face">
+    <input type="url" name="url" value="<%= url %>"/>
+    <button>Recognize</button>
+    <textarea><%= JSON.stringify(result) %></textarea>
+</form>
+
+</body>
+</html>

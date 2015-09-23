@@ -69,17 +69,33 @@ app.get('/dice', function(req, res) {
 app.post('/dice', function(req, res) {
   var list = utils.die(req.body.rolls);
   var sum = list.reduce(function(curr, prev){return curr+prev}, 0);
-  var avg = sum / list.length;
-  list.reduce(function(curr, prev, i) {return prev + ((curr - prev) / i + 1)}, 0);
+  var avg = list.reduce(function(prev, curr, i) { return (curr + i * prev) / (i + 1) }, 0);
   res.render('math/dice', {rolls: req.body.rolls, 'list': list, 'sum': sum, 'avg': avg});
 })
 
+app.post('/yoda', function(req, res) {
+  unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + req.body.phrase)
+      .header("X-Mashape-Key", process.env.MASHAPE)
+      .header("Accept", "text/plain")
+      .end(function (result) {
+        console.log(result.status, result.headers, result.body);
+        res.send(result.body + '\n')
+      });
+});
+app.get('/face', function(req, res) {
+  res.render('home/face', {'url': '', result: ''});
+})
 
-
-
-
-
-
+app.post('/face', function(req, res) {
+// These code snippets use an open-source library.
+  unirest.get("https://faceplusplus-faceplusplus.p.mashape.com/detection/detect?attribute=glass%2Cpose%2Cgender%2Cage%2Crace%2Csmiling&url=" + req.body.url)
+      .header("X-Mashape-Key", process.env.MASHAPE)
+      .header("Accept", "application/json")
+      .end(function (result) {
+        res.render('home/face', {'url': req.body.url, 'result': result});
+        console.log(result.status, result.headers, result.body);
+      });
+})
 
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
