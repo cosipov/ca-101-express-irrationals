@@ -34,8 +34,26 @@ module.exports = server;
 /* ----------------------------------------------------------------------------------------- */
 
 app.get('/', function(req, res){
-  res.send('ok');
+  res.render('home/index');
 });
+
+app.get('/square', function(req, res){
+  res.render('math/square', {square: null});
+});
+
+app.post('/square', function(req, res){
+  console.log(req.body);
+  var square = req.body.x * req.body.x;
+  res.render('math/square',{square: square});
+});
+
+
+
+
+
+
+
+
 
 /* ----------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------- */
