@@ -11,6 +11,8 @@ var methodOverride = require('method-override');
 var morgan = require('morgan');
 var unirest = require('unirest');
 
+var utils = require('./public/js/util');
+
 var app = express();
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -47,6 +49,18 @@ app.post('/square', function(req, res){
   res.render('math/square',{square: square});
 });
 
+app.get('/distance', function(req, res) {
+  res.render('math/distance', {distance: '', 'x1': '',
+    'y1': '', 'x2': '', 'y2': ''});
+});
+
+app.post('/distance', function(req, res) {
+  console.log('post - distance')
+  var distance = utils.distance({'x': req.body.x1, 'y': req.body.y1},
+                                {'x': req.body.x2, 'y': req.body.y2});
+  res.render('math/distance', {'distance': distance, 'x1': req.body.x1,
+    'y1': req.body.y1, 'x2': req.body.x2, 'y2': req.body.y2});
+})
 
 
 

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Home page</h1>
+<h3>Nav bar</h3>
+<ul>
+    <li><a href="/">Home</a></li>
+</ul>
+
+<form method="post" action="/distance">
+    <input type="text" name="x1" value="<%= x1 %>"/>
+    <input type="text" name="y1" value="<%= y1 %>"/>
+    <br/>
+    <input type="text" name="x2" value="<%= x2 %>"/>
+    <input type="text" name="y2" value="<%= y2 %>"/>
+    <br/>
+    <button>Distance</button>
+    <br/>
+    <input type="text" value="<%= distance %>"/>
+</form>
+</body>
+</html>
